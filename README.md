@@ -25,14 +25,41 @@ Aplicación de lista de tareas desarrollada con **Next.js** y **renderizado del 
 
 ---
 
+## 🌐 Rutas (Frontend y Backend)
+
+### 🔸 Frontend (`pages/`)
+
+| Ruta               | Método | Descripción                                 |
+|--------------------|--------|---------------------------------------------|
+| `/`                | GET    | Página principal, lista tareas vía SSR      |
+| `/todo-fake`       | GET    | Página CRUD conectada a jsonplaceholder     |
+
+---
+
+### 🔹 Backend (`pages/api/`)
+
+| Ruta                   | Método           | Descripción                                      |
+|------------------------|------------------|--------------------------------------------------|
+| `/api/todos`           | GET, POST        | Listar o agregar tareas (modo local/API)         |
+| `/api/posts`           | GET, POST        | CRUD desde JSONPlaceholder (proxy externo)       |
+| `/api/posts/[id]`      | GET, PUT, DELETE | Operaciones por ID vía JSONPlaceholder (proxy)   |
+
+> 🔁 Las rutas `/api/posts` y `/api/posts/[id]` funcionan como intermediarios hacia `https://jsonplaceholder.typicode.com/posts`.
+
+---
+
 ## 🗂️ Estructura del proyecto
 
 ```
 todo-list-nextjs-ssr/
 ├── pages/
 │   ├── index.tsx              # Página principal (SSR)
+│   ├── todo-fake/index.tsx    # CRUD con JSONPlaceholder
 │   └── api/
-│       └── todos.ts           # API Route (opcional para backend simulado)
+│       ├── todos.ts
+│       └── posts/
+│           ├── index.ts
+│           └── [id].ts
 ├── components/
 │   ├── TodoForm.tsx
 │   └── TodoItem.tsx
@@ -41,7 +68,7 @@ todo-list-nextjs-ssr/
 ├── types/
 │   └── todo.ts
 ├── utils/
-│   └── storage.ts             # Manejo local o API
+│   └── storage.ts
 ├── public/
 └── README.md
 ```
